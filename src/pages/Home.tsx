@@ -1,11 +1,13 @@
+import { Button } from '../components/button'
 import { CardMatch } from '../components/cardMatch'
 import { CardNews } from '../components/cardNews'
+import ScreenPage from '../components/screenPage'
 
 export function Home() {
   return (
-    <div className="flex flex-col gap-20">
-      <section className="flex justify-center">
-        <div className="relative flex w-full max-w-[1440px]">
+    <ScreenPage>
+      <div className="flex flex-col gap-20">
+        <section className="relative flex w-full">
           <img
             alt="Banner"
             className="h-full w-full object-cover"
@@ -17,48 +19,30 @@ export function Home() {
               encontra com a tradição!
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="flex flex-col justify-center lg:flex-row ">
-        <div className="p-6">
-          <h4 className="mb-4 font-bold text-2xl">Próximo Jogos</h4>
-          <CardMatch />
-        </div>
-        <div className="p-6">
-          <h4 className="mb-4 font-bold text-2xl">Último Jogos</h4>
-          <CardMatch />
-        </div>
-      </section>
+        <section className="flex flex-col justify-center lg:flex-row">
+          <div className="p-6">
+            <h4 className="mb-4 font-bold text-2xl">Próximo Jogos</h4>
+            <CardMatch />
+          </div>
+          <div className="p-6">
+            <h4 className="mb-4 font-bold text-2xl">Último Jogos</h4>
+            <CardMatch />
+          </div>
+        </section>
 
-      <section className="flex flex-col justify-center">
-        <h4 className="mb-4 font-bold text-2xl">Ultimas Notícias</h4>
-        <div className="flex w-full max-w-[1440px] gap-10 px-6 py-2 md:grid md:grid-cols-[1fr_1fr]">
-          <CardNews />
-          <CardNews />
-          <CardNews />
-          <CardNews />
-        </div>
-        <button
-          className="mx-auto mt-4 w-1/2 rounded-lg bg-blue-800 px-4 py-2 text-white hover:bg-blue-700"
-          type="button"
-        >
-          LEIA MAIS
-        </button>
-      </section>
-    </div>
+        <ScreenPage.SectionCol>
+          <h4 className="mb-4 font-bold text-2xl">Ultimas Notícias</h4>
+          <div className='flex flex-col gap-3 py-2 md:grid md:grid-cols-[1fr_1fr] md:gap-10'>
+            <CardNews />
+            <CardNews />
+            <CardNews />
+            <CardNews />
+          </div>
+          <Button title='LEIA MAIS' />
+        </ScreenPage.SectionCol>
+      </div>
+    </ScreenPage>
   )
 }
-
-// .list {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr;
-//     gap: 1.5rem;
-//   }
-
-//   @media screen and (max-width: 700px) {
-//     .list {
-//       display: flex;
-//       flex-direction: column;
-//     }
-//   }

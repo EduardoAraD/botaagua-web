@@ -1,11 +1,31 @@
 import { Menu, User } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Logo } from './logo'
 
 export function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+  
+  const handleWindowSizeChange = () => {
+    setScreenWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
+  })
+
+  useEffect(() => {
+    if(screenWidth > 768 && isOpenMenu) {
+      setIsOpenMenu(false)
+    }
+  })
+
+  const isNavVisible = screenWidth > 768 || isOpenMenu
 
   return (
     <header>
@@ -44,15 +64,21 @@ export function Header() {
             <Menu size={20} />
           </button>
 
-          <nav className="flex p-2 md:pb-2">
-            <ul className='flex flex-col items-start gap-2 font-medium text-lg md:flex-row md:items-center md:gap-4'>
-              <li>Sobre</li>
-              <li>Elenco</li>
-              <li>Jogos</li>
-              <li>Campeonatos</li>
-              <li>Contato</li>
-            </ul>
-          </nav>
+          {isNavVisible && (
+            <nav className="flex p-2 md:pb-2">
+              <ul className='flex flex-col items-start gap-2 font-medium text-lg md:flex-row md:items-center md:gap-4'>
+                <li>
+                  <Link to={'/sobre'}>Sobre</Link>
+                </li>
+                <li>
+                  <Link to={'/elenco'}>Elenco</Link>
+                </li>
+                <li>Jogos</li>
+                <li>Campeonatos</li>
+                <li>Contato</li>
+              </ul>
+            </nav>
+          )}
         </div>
       </div>
     </header>
